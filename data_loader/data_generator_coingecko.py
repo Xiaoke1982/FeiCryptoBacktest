@@ -5,7 +5,7 @@ import time
 
 def generate_data_coingecko(output_path, coin_id = "bitcoin", vs_currency = "usd",
                             start_date = "2023-11-01", end_date = "2024-10-01",
-                            intervel = "4h"):
+                            interval = "4h"):
     """
     Fetch cryptocurrency data using the range API from CoinGeckoAPI,
     resample to the desired interval, and save it as a CSV file.
@@ -46,4 +46,6 @@ def generate_data_coingecko(output_path, coin_id = "bitcoin", vs_currency = "usd
     
 
 if __name__ == "__main__":
-    generate_data_coingecko("../data/bitcoin_4h_data.csv")
+    generate_data_coingecko("../data/bitcoin_4h_data.csv", coin_id = "bitcoin", vs_currency = "usd",
+                            start_date = "2023-11-01", end_date = "2024-10-01",
+                            interval = "4h")

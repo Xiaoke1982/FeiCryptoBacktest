@@ -19,7 +19,7 @@ def generate_data_yf(output_path, symbol = "ETH-USD",
         
         print(f"fecthing {symbol} data from {start_date} to today with interval {interval}...")
         data = yf.download(symbol, start = start_date, 
-                           interval =i nterval)
+                           interval = interval)
     else:
         
         print(f"fecthing {symbol} data from {start_date} to {end_date} with interval {interval}...")
