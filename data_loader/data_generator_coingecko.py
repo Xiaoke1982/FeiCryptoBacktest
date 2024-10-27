@@ -27,17 +27,23 @@ def fetch_hourly_data(coin_id, vs_currency, start_date, end_date):
 
         from_timestamp = int(current_start.timestamp())
         to_timestamp = int(current_end.timestamp())
-                             
+        
+        print(f"fetching hourly data from {current_start} to {current_end}...")
         data = cg.get_coin_market_chart_range_by_id(id = coin_id, vs_currency = vs_currency,
                                                 from_timestamp = from_timestamp, to_timestamp = to_timestamp)
-
+        
+        # convert data to a dataframe
         df = pd.DataFrame(data["prices"], columns = ["Timestamp", "Price"])
         df["Date"] = pd.to_datetime(df["Timestamp"], unit="ms")
         df.set_index("Date", inplace = True)
 
         df_list.append(df)
-
-        curent_start = current_end
+        
+        # Add a delay between requests to avoid hitting the rate limit
+        time.sleep(21)  # wait 21 seconds
+        
+        # update the current_start
+        current_start = current_end
 
     
     # Concatenate all dataframes into one dataframe
