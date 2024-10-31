@@ -18,11 +18,13 @@ class BacktestEngine:
         
         self.cash_stack = [initial_cash * 0.2] * 5
         self.position_stack = []
-        self.portfolio_value_list = []
+        self.portfolio_value_list = [] #Track portfolio value over time
         
         
     def run(self):
         """
+        Generate trading signals and Execute trades based on signals.
+        Protfolio value will be recorded over time.
         """
         
         # Generate the trading signals for each close price
@@ -32,29 +34,39 @@ class BacktestEngine:
             signal = signal_list[i]
             price = self.data["Close"].iloc[i]
             
-            if signal == 1 and len(self.cash_stack) > 0:
+            if signal == 1 and len(self.cash_stack) > 0: # buy signal
                 cash = self.cash_stack.pop()
                 shares_to_buy = cash / price
                 
                 self.position_stack.append(shares_to_buy)
                 
-            elif signal == -1 and len(self.position_stack) > 0:
+            elif signal == -1 and len(self.position_stack) > 0: #sell signal
                 shares_to_sell = self.position_stack.pop()
                 cash = price * shares_to_sell
                 
                 self.cash_stack.append(cash)
                 
-                
+            # calculate current portfolio value   
             current_portfolio_value = sum(self.cash_stack) + sum(self.position_stack) * price
             self.portfolio_value_list.append(current_portfolio_value)
             
             
     def get_results(self):
+        """
+        retrieve the portfolio values over the backtesting period
         
+        @return: A list of portfolio values at each time step
+        """
         return self.portfolio_value_list
         
         
+    
     def calculate_performance(self):
+        """
+        calculate the total return
+
+        @return: a dictionary that contains total return information
+        """
         
         final_value = self.portfolio_value_list[-1]
         
