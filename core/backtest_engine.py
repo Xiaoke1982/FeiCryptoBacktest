@@ -34,7 +34,7 @@ class BacktestEngine:
             
             if signal == 1 and len(self.cash_stack) > 0:
                 cash = self.cash_stack.pop()
-                shares_to_buy = cash // price
+                shares_to_buy = cash / price
                 
                 self.position_stack.append(shares_to_buy)
                 
@@ -44,10 +44,9 @@ class BacktestEngine:
                 
                 self.cash_stack.append(cash)
                 
-            
+                
             current_portfolio_value = sum(self.cash_stack) + sum(self.position_stack) * price
             self.portfolio_value_list.append(current_portfolio_value)
-            
             
             
     def get_results(self):
