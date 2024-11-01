@@ -1,4 +1,4 @@
-from portfolio_manager import PortfolioManager
+from core.portfolio_manager import PortfolioManager
 
 
 class BacktestEngine:
@@ -27,6 +27,8 @@ class BacktestEngine:
         Protfolio value will be recorded over time.
         """
         
+        print(f"Backtesting from {self.data.index[0]} to {self.data.index[len(self.data)-1]}...")
+        
         # Generate the trading signals for each close price
         signal_list = self.strategy.generate_signals(self.data)
         
@@ -44,7 +46,7 @@ class BacktestEngine:
                 success = self.portfolio_manager.sell(current_price)
                 
                 if not success:
-                    print (f"Failed to sell at {self.data.index[i]]}: Insufficient position.")
+                    print (f"Failed to sell at {self.data.index[i]}: Insufficient position.")
                 
             # calculate current portfolio value   
             current_portfolio_value = self.portfolio_manager.get_portfolio_value(current_price)

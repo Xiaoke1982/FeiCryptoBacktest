@@ -2,7 +2,7 @@
 
 class PortfolioManager:
     
-    def __init__(self, initial_cash, transaction_fee = 0.001, n_splits = 5):
+    def __init__(self, initial_cash, transaction_fee = 0.001, n_splits = 10):
         
         self.cash_stack = [initial_cash / n_splits] * n_splits
         self.position_stack = []
