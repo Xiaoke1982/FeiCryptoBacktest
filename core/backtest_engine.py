@@ -16,6 +16,7 @@ class BacktestEngine:
         self.strategy = strategy
         self.initial_cash = initial_cash
         
+        # Initialize the portfolio manager object, it will hand buy, sell trading action and calculate portfolio value at each time step
         self.portfolio_manager = PortfolioManager(initial_cash)
         
         self.portfolio_value_list = [] #Track portfolio value over time
@@ -37,13 +38,13 @@ class BacktestEngine:
             current_price = self.data["Close"].iloc[i]
             
             if signal == 1: # buy signal
-                success = self.portfolio_manager.buy(current_price)
+                success = self.portfolio_manager.buy(current_price)  # returns if the buy action is successful or not
                 
                 if not success:
                     print (f"Failed to buy at {self.data.index[i]}: Insufficient cash.")
                 
             elif signal == -1: #sell signal
-                success = self.portfolio_manager.sell(current_price)
+                success = self.portfolio_manager.sell(current_price)  # returns if the sell action is successful or not
                 
                 if not success:
                     print (f"Failed to sell at {self.data.index[i]}: Insufficient position.")
