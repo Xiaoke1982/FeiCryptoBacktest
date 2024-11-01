@@ -1,3 +1,4 @@
+from portfolio_manager import PortfolioManager
 
 
 class BacktestEngine:
@@ -15,9 +16,8 @@ class BacktestEngine:
         self.strategy = strategy
         self.initial_cash = initial_cash
         
+        self.portfolio_manager = PortfolioManager(initial_cash)
         
-        self.cash_stack = [initial_cash * 0.2] * 5
-        self.position_stack = []
         self.portfolio_value_list = [] #Track portfolio value over time
         
         
@@ -32,22 +32,22 @@ class BacktestEngine:
         
         for i in range(len(self.data)):
             signal = signal_list[i]
-            price = self.data["Close"].iloc[i]
+            current_price = self.data["Close"].iloc[i]
             
-            if signal == 1 and len(self.cash_stack) > 0: # buy signal
-                cash = self.cash_stack.pop()
-                shares_to_buy = cash / price
+            if signal == 1: # buy signal
+                success = self.portfolio_manager.buy(current_price)
                 
-                self.position_stack.append(shares_to_buy)
+                if not success:
+                    print (f"Failed to buy at {self.data.index[i]}: Insufficient cash.")
                 
-            elif signal == -1 and len(self.position_stack) > 0: #sell signal
-                shares_to_sell = self.position_stack.pop()
-                cash = price * shares_to_sell
+            elif signal == -1: #sell signal
+                success = self.portfolio_manager.sell(current_price)
                 
-                self.cash_stack.append(cash)
+                if not success:
+                    print (f"Failed to sell at {self.data.index[i]]}: Insufficient position.")
                 
             # calculate current portfolio value   
-            current_portfolio_value = sum(self.cash_stack) + sum(self.position_stack) * price
+            current_portfolio_value = self.portfolio_manager.get_portfolio_value(current_price)
             self.portfolio_value_list.append(current_portfolio_value)
             
             
