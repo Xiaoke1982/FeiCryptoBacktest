@@ -19,7 +19,7 @@ class Performance:
 
 
     @staticmethod
-    def max_drawdown(portfolio_value_list):
+    def calculate_max_drawdown(portfolio_value_list):
         """
         Calculate the max drawdown based on the portfolio values over time
 
@@ -31,7 +31,7 @@ class Performance:
 
         cumulative_max_series = portfolio_value_series.cummax()
 
-        drawdown_series = (portfo_value_series - cumulative_max_series) / cumulative_max_series
+        drawdown_series = (portfolio_value_series - cumulative_max_series) / cumulative_max_series
 
         max_drawdown_value = drawdown_series.min()
 
@@ -48,6 +48,6 @@ class Performance:
         @return: a dictionary including Total Return, Max Drawdown, etc...
         """
         return {
-            "Total Return": Performance.calculate_total_return(portforlio_value_list),
+            "Total Return": Performance.calculate_total_return(portfolio_value_list),
             "Maximum Drawdown": Performance.calculate_max_drawdown(portfolio_value_list)
         }

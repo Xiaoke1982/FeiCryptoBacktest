@@ -1,4 +1,5 @@
 from core.portfolio_manager import PortfolioManager
+from core.performance import Performance
 
 
 class BacktestEngine:
