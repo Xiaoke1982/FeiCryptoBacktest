@@ -54,27 +54,12 @@ class BacktestEngine:
             self.portfolio_value_list.append(current_portfolio_value)
             
             
-    def get_results(self):
-        """
-        retrieve the portfolio values over the backtesting period
+    def get_performance_metrics(self):
+            """
+            get performance metrics using performance.py mehtods
         
-        @return: A list of portfolio values at each time step
-        """
-        return self.portfolio_value_list
+            @return: a dictionary that contains performance metrics
+            """
         
-        
-    
-    def calculate_performance(self):
-        """
-        calculate the total return
-
-        @return: a dictionary that contains total return information
-        """
-        
-        final_value = self.portfolio_value_list[-1]
-        
-        total_return = (final_value - self.initial_cash) / self.initial_cash
-        
-        return {"Total Return": total_return}
-                
+            return Performance.calculate_performance(self.portfolio_value_list)
         

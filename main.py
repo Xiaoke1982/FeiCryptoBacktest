@@ -26,6 +26,6 @@ if __name__ == "__main__":
     
     # Step 5
     # calculate performance and print it out
-    performance = backtest_engine.calculate_performance()
+    performance = backtest_engine.get_performance_metrics()
     print(performance)
     
