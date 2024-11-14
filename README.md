@@ -1,7 +1,7 @@
 # FeiCryptoBacktest
 
 ## Overview
-**FeiCryptoBacktest** is a modular Python framework designed for backtesting cryptocurrency trading strategies. It includes tools for portfolio management, strategy integration, performance evaluation, and supports CSV data loading, making it an ideal platform for building and testing crypto strategies.
+**FeiCryptoBacktest** is a modular Python framework designed for backtesting cryptocurrency trading strategies. It includes tools for portfolio management, strategy integration, and performance evaluation, and supports CSV data loading, making it an ideal platform for building and testing crypto trading strategies.
 
 ## Project Structure
 The project follows a modular structure to enhance reusability and maintainability. Below is an overview of the main folders and their contents:
