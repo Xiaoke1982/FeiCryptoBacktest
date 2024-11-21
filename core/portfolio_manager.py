@@ -2,7 +2,7 @@ from core.order_executor import OrderExecutor
 
 class PortfolioManager:
     
-    def __init__(self, initial_cash, transaction_rate = 0.001, slipage = 0.1, n_splits = 10):
+    def __init__(self, initial_cash, transaction_rate = 0.001, slippage_rate = 0.0001, n_splits = 10):
         """
         Initialize the PortfolioManager object instance
         
@@ -15,7 +15,7 @@ class PortfolioManager:
         self.cash_stack = [initial_cash / n_splits] * n_splits
         self.position_stack = []  #Initialize an empty position stack
         
-        self.order_executor = OrderExecutor(transaction_rate, slipage)
+        self.order_executor = OrderExecutor(transaction_rate, slippage_rate)
     
     def buy(self, current_price):
         """

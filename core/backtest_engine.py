@@ -42,16 +42,20 @@ class BacktestEngine:
                 success = self.portfolio_manager.buy(current_price)  # returns if the buy action is successful or not
                 
                 if not success:
-                    print (f"Failed to buy at {self.data.index[i]}: Insufficient cash.")
+                    print(f"Failed to buy at {self.data.index[i]}: Insufficient cash.")
+                else:
+                    print(f"Buy at {self.data.index[i]} at price {current_price}")
                 
             elif signal == -1: #sell signal
                 success = self.portfolio_manager.sell(current_price)  # returns if the sell action is successful or not
                 
                 if not success:
-                    print (f"Failed to sell at {self.data.index[i]}: Insufficient position.")
-                
+                    print(f"Failed to sell at {self.data.index[i]}: Insufficient position.")
+                else:
+                    print(f"Sell at {self.data.index[i]} at price {current_price}")
             # calculate current portfolio value   
             current_portfolio_value = self.portfolio_manager.get_portfolio_value(current_price)
+            #print(current_portfolio_value)
             self.portfolio_value_list.append(current_portfolio_value)
             
             

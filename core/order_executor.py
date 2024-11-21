@@ -12,7 +12,7 @@ class OrderExecutor:
         
         buy_price = current_price * (1 + self.slippage_rate)
         
-        shares_to_buy = cash * (1 - self.transaction) / buy_price
+        shares_to_buy = cash * (1 - self.transaction_rate) / buy_price
         
         return shares_to_buy
         
