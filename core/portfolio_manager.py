@@ -8,6 +8,7 @@ class PortfolioManager:
         
         @param initial_cash: initial cash
         @param transaction_rate: transaction cost rate, default is 0.1%
+        @param slippage_rate: slippage rate default is 0.01%
         @param n_splits: the number of portions to split the initial cash into for cash stack, default is 10
         """
         
